@@ -14,8 +14,8 @@ jobs:
 
       - name: Commit changes
         run: |
-          git config --local user.email "test@test.com"
-          git config --local user.name "Test"
+          git config --local user.email "devops@cursobeta.com.br"
+          git config --local user.name "Argocd"
           git clone https://rafaeldevopscursobeta:${{ secrets.CBPATGHPKG001 }}@github.com/rafaeldevopscursobeta/testedois.git
           cd testedois/
           echo "teste workflow" > arquivo.txt
