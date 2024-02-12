@@ -10,26 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-      
-    - name: Make changes
-      run: |
-        echo "Some changes" >> README.md
-        
-    - name: Commit changes
-      run: |
-        git config --global user.email "you@example.com"
-        git config --global user.name "Your Name"
-        git clone git@github.com:rafaeldevopscursobeta/testedois.git
-        ls -lha
-        cd testedois
-        mkdir testeteste
-        echo "Some changes" >> testeteste/README2.md
-        git add .
-        git commit -m "Made some changes"
-        
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+
+      - name: Clone target repository
+        uses: actions/checkout@v2
+        with:
+          repository: "rafaeldevopscursobeta/testedois"
+
+      - name: Make changes
+        run: |
+          echo "Alteracao via workflows" >> README.md
+
+      - name: Commit changes
+        run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "Argocd Service"
+          git add .
+          git commit -m "Made some changes"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repository: "rafaeldevopscursobeta/testedois"
+          branch: "main"
+          force: true
+          message: "Atualização automática via workflow"
