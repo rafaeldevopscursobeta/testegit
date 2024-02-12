@@ -1,0 +1,35 @@
+name: Commit and Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  commit_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Make changes
+      run: |
+        echo "Some changes" >> README.md
+        
+    - name: Commit changes
+      run: |
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
+        git clone git@github.com:rafaeldevopscursobeta/testedois.git
+        ls -lha
+        cd testedois
+        mkdir testeteste
+        echo "Some changes" >> testeteste/README2.md
+        git add .
+        git commit -m "Made some changes"
+        
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
