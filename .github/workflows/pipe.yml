@@ -11,32 +11,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
-          fetch-depth: 0
-          token: ${{ secrets.CBPATGHPKG001 }}
-
-      - name: Clone target repository
-        uses: actions/checkout@v2
-        with:
-          repository: "rafaeldevopscursobeta/testedois"
-
-      - name: Make changes
-        run: |
-          echo "Alteracao via workflows" >> README.md
 
       - name: Commit changes
         run: |
-          git config --global user.email "you@example.com"
-          git config --global user.name "Argocd Service"
+          git config --local user.email "test@test.com"
+          git config --local user.name "Test"
+          git clone https://rafaeldevopscursobeta:${{ secrets.CBPATGHPKG001 }}@github.com/rafaeldevopscursobeta/testedois.git
+          cd testedois/
+          echo "teste workflow" > arquivo.txt
           git add .
           git commit -m "Made some changes"
+          git push
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.CBPATGHPKG001 }}
-          repository: "rafaeldevopscursobeta/testedois"
-          branch: "main"
-          force: true
-          message: "Atualização automática via workflow"
+
