@@ -14,7 +14,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          git clone https://rafaeldevopscursobeta:${{ secrets.CBPATGHPKG001 }}@github.com/rafaeldevopscursobeta/testedois.git
+          git clone https://rafaeldevopscursobeta:${{ secrets.SECRET_TOKEN }}@github.com/rafaeldevopscursobeta/testedois.git
           cd testedois/
           git config --local user.email "test@test.com"
           git config --local user.name "Test"          
